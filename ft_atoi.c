@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:54 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/05/19 19:43:56 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/16 20:30:04 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,13 @@ int	check_argment(char **av, t_program *data)
 	if (data->philo_nb <= 0 || data->die_time <= 0 || data->eat_time <= 0
 		|| data->sleep_time <= 0)
 		return (ft_putstr_fd("Error\nThe value of argment is invalid", 2), 1);
-	if (data->philo_nb > 200 || data->die_time < 60000 || data->eat_time < 60000
+	if (data->die_time < 60000 || data->eat_time < 60000
 		|| data->sleep_time < 60000)
 		return (ft_putstr_fd("Error\nThe value of argment is invalid", 2), 1);
 	if (av[5])
 	{
-		if ((data->limit_meals = ft_atoi(av[5])) == -1)
-			return (ft_putstr_fd("Error\nThe value of argment is invalid", 2),
-				1);
+		if ((data->limit_meals = ft_atoi(av[5])) == -1 || ft_atoi(av[5]) == 0)
+			return (ft_putstr_fd("Error\nThe value of argment is invalid", 2),1);
 	}
 	return (0);
 }
@@ -65,6 +64,7 @@ int	valid_argment(char **av, t_program *data)
 {
 	if (check_argment(av, data))
 		return (1);
-	// crate_thread(data);
+	data_init(data);
+	create_thread(data);
 	return (0);
 }

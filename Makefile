@@ -13,13 +13,12 @@ all:${NAME}
 
 ${NAME}:${OBG}
 	@${CC} ${CFLAGS} ${OBG} -o ${NAME}
-	@rm -f ${OBG}
 	@echo "💯"
 
 
-# clean:
-# 	@rm -f ${OBG}
-# 	@echo "🧹"
+clean:
+	@rm -f ${OBG}
+	@echo "🧹"
 fclean:
 	@rm -f ${NAME}
 	@echo "🗑️"
