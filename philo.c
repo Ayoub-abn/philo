@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:37:23 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/16 23:38:06 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:04:16 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void data_init(t_program *data)
 {
 	int i = 0;
 	pthread_mutex_init(&data->mx, NULL);
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_nb);
 	data->philos = malloc(data->philo_nb * sizeof(t_philo));
 	while (i < data->philo_nb)
 	{
+		pthread_mutex_init(&data->forks[i],NULL);
 		data->philos[i].philo_id = i + 1;
 		i++;
 	}
@@ -43,7 +45,11 @@ void is_sleeping(t_program *data, int philo_id)
 void is_thinking(t_program *data, int philo_id)
 {
 	printf("[%ld] the philo %d is thinking\n", get_current_time() - data->start_time, philo_id);
-	usleep(6000);
+	// usleep(6000);
+}
+void is_eating (t_program *data,int philo_id)
+{
+	
 }
 void *philo_routine(void *arg)
 {
@@ -71,4 +77,3 @@ void create_thread(t_program *data)
 	free(data->thread);
 	free(data->philos);
 }
-

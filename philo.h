@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:14:24 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/16 23:37:49 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:06:44 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@
 typedef struct s_philo
 {
 	int philo_id;
-
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
+	
 }					t_philo;
 
 typedef struct s_program
@@ -41,7 +43,7 @@ typedef struct s_program
 	long			limit_meals;
 	long			start_time;
 
-	// pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*forks;
 	// pthread_mutex_t	*l_fork;
 	pthread_mutex_t mx;
 	t_philo			*philos;
