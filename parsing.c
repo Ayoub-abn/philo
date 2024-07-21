@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:54 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/16 20:30:04 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:22:09 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ long	ft_atoi(const char *str)
 int	check_argment(char **av, t_program *data)
 {
 	data->philo_nb = ft_atoi(av[1]);
-	data->die_time = (ft_atoi(av[2]) * 1000);
-	data->eat_time = (ft_atoi(av[3]) * 1000);
-	data->sleep_time = (ft_atoi(av[4]) * 1000);
+	data->die_time = (ft_atoi(av[2]) /* * 1000 */);
+	data->eat_time = (ft_atoi(av[3]) /* * 1000 */);
+	data->sleep_time = (ft_atoi(av[4]) /* * 1000 */);
 	if (data->philo_nb <= 0 || data->die_time <= 0 || data->eat_time <= 0
 		|| data->sleep_time <= 0)
 		return (ft_putstr_fd("Error\nThe value of argment is invalid", 2), 1);
-	if (data->die_time < 60000 || data->eat_time < 60000
-		|| data->sleep_time < 60000)
+	if (data->die_time < 60 || data->eat_time < 60
+		|| data->sleep_time < 60)
 		return (ft_putstr_fd("Error\nThe value of argment is invalid", 2), 1);
 	if (av[5])
 	{

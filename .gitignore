@@ -1,5 +1,4 @@
 *.o
 *.out
-minishell
 .vscode
 tkharebi9.c
