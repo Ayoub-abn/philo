@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:40:28 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/23 12:51:56 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:18:43 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ int unlock(pthread_mutex_t *mx)
 
 void is_print(int i,t_philo *philo)
 {
+	lock(&philo->data->flag);
+    if(philo->data->dead_flag == 1)
+	{
+		unlock(&philo->data->flag);
+		return;
+	}
+    unlock(&philo->data->flag);
+	
     lock(&philo->data->status);
     if(i == SLEEPING)
 	    printf("%ld %d is sleeping\n", get_current_time() - philo->data->start_time, philo->philo_id);
@@ -72,8 +80,8 @@ void is_print(int i,t_philo *philo)
 	    printf("%ld %d is thinking\n", get_current_time() - philo->data->start_time, philo->philo_id);
     if(i == EATING)
 	    printf(GREEN "%ld %d is eating\n" RESET,get_current_time() - philo->data->start_time,  philo->philo_id);
-    if(i == DIED)
-	    printf(RED  "%ld %d died\n"RESET,get_current_time() - philo->data->start_time,  philo->philo_id);       
+    // if(i == DIED)
+	//     printf(RED  "%ld %d died\n"RESET,get_current_time() - philo->data->start_time,  philo->philo_id);       
     if(i == TAKEN_A_FORK)
         printf("%ld %d has taken a fork\n",get_current_time() - philo->data->start_time, philo->philo_id);
     unlock(&philo->data->status);

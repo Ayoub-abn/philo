@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:21:01 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/23 11:56:44 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/23 14:50:56 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void monitor(t_program *data)
                 lock(&data->flag);
                 data->dead_flag = 1;
                 unlock(&data->flag);
-                is_print(DIED, &data->philos[i]);
+	            printf(RED  "%ld %d died\n"RESET,get_current_time() - data->start_time,  data->philos->philo_id);
                 unlock(&data->monitor);
                 return;
             }

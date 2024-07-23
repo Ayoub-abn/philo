@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:22:05 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/23 13:01:15 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/23 14:39:22 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ bool is_eating (t_philo *philo)
     //------------------------------//
     if(philo->data->philo_nb == 1)
     {
+         //------------------------------//
+        is_print(TAKEN_A_FORK,philo); 
+        //------------------------------//
         while(1)
         {
             lock(&philo->data->flag);
@@ -48,8 +51,9 @@ bool is_eating (t_philo *philo)
     if (philo->data->dead_flag == 1)
         return (unlock(&philo->data->flag),unlock(philo->l_fork), false);
     unlock(&philo->data->flag);
- 
-	
+    //------------------------------//
+    is_print(TAKEN_A_FORK,philo); 
+    //------------------------------//
 	lock(philo->r_fork);
     lock(&philo->data->flag);
     if (philo->data->dead_flag == 1)
