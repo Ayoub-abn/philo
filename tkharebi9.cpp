@@ -1,7 +1,7 @@
 
 
 #include "philo.h"
-
+// ./philo 5 800 200 200 15  |  awk '/is eating/ {print $2}'  | sort | uniq -c
 // long get_time()
 // {
 // 	struct timeval tm;

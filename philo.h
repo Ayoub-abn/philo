@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:14:24 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/21 16:52:40 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/23 09:46:06 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
 
+#define SLEEPING        1
+#define THINKING        2
+#define EATING          3
+#define DIED			4
+#define TAKEN_A_FORK    5
 ///////////////////////////mud///////////////////////////
 
 struct s_program ;
@@ -31,33 +39,36 @@ struct s_program ;
 typedef struct s_philo
 {
 	pthread_t		thread;
-	int philo_id;
-	long last_time_eating;
+	int 			philo_id;
+	long 			last_time_eating;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
+	int				meals;
 	struct s_program *data;
 	
 }					t_philo;
 
 typedef struct s_program
 {
-	// pthread_t		*thread;
-	int				dead_flag;
+	t_philo			*philos;
+	////////////////////////////
 	long			die_time;
 	long			eat_time;
 	long			sleep_time;
-	int				philo_nb;
 	long			limit_meals;
+	int				philo_nb;
+	////////////////////////////
 	long			start_time;
-	t_philo			*philos;
 
+	int				dead_flag;
+	int				hav_meals;
+	int				eat_all_meals;
 	pthread_mutex_t mx;
 	pthread_mutex_t status;
-	pthread_mutex_t pr;
+	pthread_mutex_t monitor;
 	pthread_mutex_t flag;
+	pthread_mutex_t meals;
 	pthread_mutex_t	*forks;
-	// pthread_mutex_t	*l_fork;
-	// pthread_mutex_t	dead_lock;
 	
 }					t_program;
 
@@ -65,6 +76,8 @@ typedef struct s_program
 
 
 // void	monitor(t_program **data);
+int unlock(pthread_mutex_t *mx);
+int lock(pthread_mutex_t *mx);
 size_t	get_current_time(void);
 void data_init(t_program *data);
 void	monitor(t_program *data);

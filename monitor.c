@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:21:01 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/21 16:55:54 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:56:44 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,39 @@
 
 void monitor(t_program *data)
 {
-    usleep(700);
-    while (1)
+    usleep(3);
+    while (true)
     {
-        for (int i = 0; i < data->philo_nb; i++)
+        if(data->hav_meals)
         {
-            pthread_mutex_lock(&data->pr);
-            if (get_current_time() - data->philos[i].last_time_eating > (size_t)data->die_time)
+            lock(&data->meals);
+            
+            if(data->eat_all_meals == 0)
             {
-                pthread_mutex_unlock(&data->pr);
-                
-                pthread_mutex_lock(&data->flag);
+                // printf("hi\n");
+                unlock(&data->meals);
+                lock(&data->flag);
                 data->dead_flag = 1;
-                pthread_mutex_unlock(&data->flag);
-                
-                // pthread_mutex_lock(&data->status);
-                is_print(4, &data->philos[i]);
-                // pthread_mutex_unlock(&data->status);
+                unlock(&data->flag);
                 return;
             }
-            pthread_mutex_unlock(&data->pr);
+            unlock(&data->meals);
+        }
+        int i = 0;
+        while (i < data->philo_nb)
+        {
+            lock(&data->monitor);
+            if (get_current_time() - data->philos[i].last_time_eating > (size_t)data->die_time)
+            {
+                lock(&data->flag);
+                data->dead_flag = 1;
+                unlock(&data->flag);
+                is_print(DIED, &data->philos[i]);
+                unlock(&data->monitor);
+                return;
+            }
+            unlock(&data->monitor);
+            i++;
         }
     }
 }

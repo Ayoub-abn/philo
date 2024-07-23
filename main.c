@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:21:31 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/20 14:42:57 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:13:44 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 int	main(int ac, char *av[])
 {
 	t_program	data;
-
-	// memset(&data,0,sizeof(t_program));
+	
 	if (ac != 5 && ac != 6)
 		return (ft_putstr_fd("Error\nproblem in argment", 2), 1);
 	if (valid_argment(av, &data))
 		return (1);
+	data_init(&data);
+	create_thread(&data);
+	
 	
 }
