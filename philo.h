@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:14:24 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 17:17:21 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 22:46:47 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 # define RED "\033[31m"
 # define GREEN "\033[32m"
 
-# define SLEEPING 1
-# define THINKING 2
-# define EATING 3
-# define DIED 4
-# define TAKEN_A_FORK 5
+# define SLEEPING "is sleeping"
+# define THINKING "is thinking"
+# define EATING "is eating"
+// # define DIED 4
+# define TAKEN_A_FORK "has taken a fork"
 ///////////////////////////mud///////////////////////////
 
 struct	s_program;
@@ -74,7 +74,7 @@ typedef struct s_program
 int						unlock(pthread_mutex_t *mx);
 int						lock(pthread_mutex_t *mx);
 size_t					get_current_time(void);
-void					data_init(t_program *data);
+bool					data_init(t_program *data);
 void					monitor(t_program *data);
 void					is_sleeping(t_philo *philo);
 void					is_thinking(t_philo *philo);
@@ -82,13 +82,11 @@ bool					is_eating(t_philo *philo);
 void					*philo_routine(void *arg);
 size_t					get_current_time(void);
 int						ft_usleep(size_t milliseconds, t_philo *philo);
-void					is_print(int i, t_philo *philo);
+void					is_print(char *str, t_philo *philo);
 void					ft_putstr_fd(char *s, int fd);
 size_t					ft_strlen(const char *s);
 long					ft_atoi(const char *str);
 int						check_argment(char **av, t_program *data);
 int						valid_argment(char **av, t_program *data);
-// void				crate_thread(t_program *data);
-void					data_init(t_program *data);
 void					create_thread(t_program *data);
 #endif

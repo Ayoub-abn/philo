@@ -3,8 +3,11 @@
 #include "philo.h"
 
 // ./philo +3 60 60 100000 1
+// /philo 100000 100 200 200
 
 // ./philo 5 800 200 200 15  |  awk '/is eating/ {print $2}'  | sort | uniq -c
+// while true; do ./philo 5 800 200 200 5  |  awk '/is eating/ {print $2}'  | sort | uniq -c; done
+
 // long get_time()
 // {
 // 	struct timeval tm;

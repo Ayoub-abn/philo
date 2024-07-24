@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:22:05 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 17:09:23 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:45:21 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,12 @@ bool	is_eating(t_philo *philo)
 	if (philo->data->hav_meals)
 		check_meals_nb(philo);
 	//-----------------------------//
-	ft_usleep(philo->data->eat_time, philo);
 	//----------last_meal----------//
 	lock(&philo->data->monitor);
 	philo->last_time_eating = get_current_time();
 	unlock(&philo->data->monitor);
+	//-----------------------------//
+	ft_usleep(philo->data->eat_time, philo);
 	//-----------------------------//
 	(unlock(philo->l_fork), unlock(philo->r_fork));
 	return (true);

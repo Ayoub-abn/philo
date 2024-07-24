@@ -1,6 +1,7 @@
 NAME = philo
-CFLAGS = -Wall -Wextra -Werror  #-fsanitize=thread -g
-# CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
+# CFLAGS = -Wall -Wextra -Werror 
 # SRC = main.c philo.c ft_putstr_fd.c ft_atoi.c 
 SRC = ${shell find . -type f -name "*.c"}
 OBG = ${SRC:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:21:31 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 17:15:28 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 20:23:33 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	main(int ac, char *av[])
 		return (ft_putstr_fd("Error\nproblem in argment", 2), 1);
 	if (valid_argment(av, &data))
 		return (1);
-	data_init(&data);
+	if (data_init(&data) == false)
+		return (1);
 	create_thread(&data);
 	free_and_destroy(&data);
 }

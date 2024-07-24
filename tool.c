@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:40:28 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 17:28:38 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 22:45:22 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-int	ft_usleep(size_t milliseconds,t_philo *philo)
+int	ft_usleep(size_t milliseconds, t_philo *philo)
 {
 	size_t	start;
 
@@ -30,9 +30,8 @@ int	ft_usleep(size_t milliseconds,t_philo *philo)
 	{
 		lock(&philo->data->flag);
 		if (philo->data->dead_flag == 1)
-			return (unlock(&philo->data->flag), 1);
+			return (unlock(&philo->data->flag), 0);
 		unlock(&philo->data->flag);
-		return (0);
 	}
 	return (0);
 }
@@ -51,7 +50,7 @@ int	unlock(pthread_mutex_t *mx)
 	return (0);
 }
 
-void	is_print(int i, t_philo *philo)
+void	is_print(char *str, t_philo *philo)
 {
 	lock(&philo->data->flag);
 	if (philo->data->dead_flag == 1)
@@ -59,19 +58,7 @@ void	is_print(int i, t_philo *philo)
 		unlock(&philo->data->flag);
 		return ;
 	}
+	printf("%ld %d %s\n", get_current_time() - philo->data->start_time,
+		philo->philo_id, str);
 	unlock(&philo->data->flag);
-	lock(&philo->data->status);
-	if (i == SLEEPING)
-		printf("%ld %d is sleeping\n", get_current_time()
-			- philo->data->start_time, philo->philo_id);
-	if (i == THINKING)
-		printf("%ld %d is thinking\n", get_current_time()
-			- philo->data->start_time, philo->philo_id);
-	if (i == EATING)
-		printf(GREEN "%ld %d is eating\n" RESET, get_current_time()
-			- philo->data->start_time, philo->philo_id);
-	if (i == TAKEN_A_FORK)
-		printf("%ld %d has taken a fork\n", get_current_time()
-			- philo->data->start_time, philo->philo_id);
-	unlock(&philo->data->status);
 }

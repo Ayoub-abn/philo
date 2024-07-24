@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:19:34 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 16:57:31 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 20:12:15 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,32 @@ void	init_mutex(t_program *data)
 		pthread_mutex_init(&data->forks[i++], NULL);
 }
 
-void	init_forks_and_philos(t_program *data)
+bool	init_forks_and_philos(t_program *data)
 {
 	data->forks = malloc(sizeof(pthread_mutex_t) * (data->philo_nb));
+	if (!data->forks)
+	{
+		ft_putstr_fd("memory allocation failed", 2);
+		return (false);
+	}
 	data->philos = malloc(data->philo_nb * sizeof(t_philo));
+	if (!data->philos)
+	{
+		ft_putstr_fd("memory allocation failed\n", 2);
+		return (false);
+	}
+	return (true);
 }
 
-void	data_init(t_program *data)
+bool	data_init(t_program *data)
 {
 	int	i;
 
 	data->dead_flag = 0;
 	data->eat_all_meals = data->philo_nb;
-	(init_forks_and_philos(data), init_mutex(data));
+	if (init_forks_and_philos(data) == false)
+		return (false);
+	init_mutex(data);
 	i = -1;
 	while (++i < data->philo_nb)
 	{
@@ -58,4 +71,5 @@ void	data_init(t_program *data)
 		}
 	}
 	data->start_time = get_current_time();
+	return (true);
 }
