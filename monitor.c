@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:21:01 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/23 14:50:56 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 10:26:55 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void monitor(t_program *data)
 {
-    usleep(3);
+    // usleep(100);
     while (true)
     {
         if(data->hav_meals)
@@ -41,7 +41,11 @@ void monitor(t_program *data)
                 lock(&data->flag);
                 data->dead_flag = 1;
                 unlock(&data->flag);
+                
+                lock(&data->status);
 	            printf(RED  "%ld %d died\n"RESET,get_current_time() - data->start_time,  data->philos->philo_id);
+                unlock(&data->status);
+                
                 unlock(&data->monitor);
                 return;
             }

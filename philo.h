@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:14:24 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/23 09:46:06 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 10:30:56 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void is_thinking(t_philo *philo);
 bool is_eating (t_philo *philo);
 void *philo_routine(void *arg);
 size_t	get_current_time(void);
-int	ft_usleep(size_t milliseconds);
+// int	ft_usleep(size_t milliseconds);
+int	ft_usleep(size_t milliseconds,t_philo *philo);
 void is_print(int i,t_philo *philo);
 void				ft_putstr_fd(char *s, int fd);
 size_t				ft_strlen(const char *s);

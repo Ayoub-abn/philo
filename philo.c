@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:37:23 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/23 12:53:21 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 10:32:13 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void *philo_routine(void *arg)
         // if(data->philos[i].meals == 0)
     // unlock(&philo->data->meals);
     if(philo->philo_id % 2 == 0)
-        ft_usleep(60);
+        ft_usleep(60,philo);
     while (true) 
     {
         lock(&philo->data->flag);
