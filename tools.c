@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tool.c                                             :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:40:28 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 22:45:22 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 23:44:39 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ft_usleep(size_t milliseconds, t_philo *philo)
 		if (philo->data->dead_flag == 1)
 			return (unlock(&philo->data->flag), 0);
 		unlock(&philo->data->flag);
+		usleep(500);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:37:23 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 22:43:41 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 23:46:54 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	*philo_routine(void *arg)
 		if (check_flag(philo))
 			return (NULL);
 		is_thinking(philo);
-		ft_usleep(((philo->data->die_time - (get_current_time()
+		if (philo->data->philo_nb % 2)
+			ft_usleep(((philo->data->die_time - (get_current_time()
 						- philo->last_time_eating)) / 2), philo);
 	}
 	return (NULL);

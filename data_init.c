@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:19:34 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 20:12:15 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 23:38:38 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ bool	data_init(t_program *data)
 			data->philos[i].r_fork = &data->forks[i];
 		}
 	}
-	data->start_time = get_current_time();
+	// data->start_time = get_current_time();
 	return (true);
 }

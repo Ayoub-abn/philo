@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:22:05 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 19:45:21 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 23:19:04 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ bool	is_eating(t_philo *philo)
 			return (false);
 	}
 	//----------------------------//
-	lock(&philo->data->flag);
-	if (philo->data->dead_flag == 1)
-		return (unlock(&philo->data->flag), unlock(philo->l_fork), false);
-	unlock(&philo->data->flag);
+	// lock(&philo->data->flag);
+	// if (philo->data->dead_flag == 1)
+	// 	return (unlock(&philo->data->flag), unlock(philo->l_fork), false);
+	// unlock(&philo->data->flag);
 	//----------------------------//
 	//----------------------------//
 	lock(philo->r_fork);
 	//---------------------------//
-	lock(&philo->data->flag);
-	if (philo->data->dead_flag == 1)
-		return (unlock(&philo->data->flag), unlock(philo->r_fork),
-			unlock(philo->l_fork), false);
-	unlock(&philo->data->flag);
+	// lock(&philo->data->flag);
+	// if (philo->data->dead_flag == 1)
+	// 	return (unlock(&philo->data->flag), unlock(philo->r_fork),
+	// 		unlock(philo->l_fork), false);
+	// unlock(&philo->data->flag);
 	//------------------------------//
 	is_print(TAKEN_A_FORK, philo);
 	//------------------------------//
