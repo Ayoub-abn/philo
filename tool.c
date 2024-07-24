@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:40:28 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 17:10:24 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:28:38 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,19 @@ size_t	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-int	ft_usleep(size_t milliseconds)
+int	ft_usleep(size_t milliseconds,t_philo *philo)
 {
 	size_t	start;
 
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
-		usleep(500);
+	{
+		lock(&philo->data->flag);
+		if (philo->data->dead_flag == 1)
+			return (unlock(&philo->data->flag), 1);
+		unlock(&philo->data->flag);
+		return (0);
+	}
 	return (0);
 }
 
