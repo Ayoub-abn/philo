@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:54 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/22 13:19:44 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:59:04 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ long	ft_atoi(const char *str)
 		return (-1);
 	return (res * sin);
 }
+
 int	check_argment(char **av, t_program *data)
 {
 	data->hav_meals = 0;
@@ -50,14 +51,13 @@ int	check_argment(char **av, t_program *data)
 	if (data->philo_nb <= 0 || data->die_time <= 0 || data->eat_time <= 0
 		|| data->sleep_time <= 0)
 		return (ft_putstr_fd("Error\nThe value of argment is invalid", 2), 1);
-	// if (data->die_time < 60 || data->eat_time < 60
-	// 	|| data->sleep_time < 60)
-	// 	return (ft_putstr_fd("Error\nThe value of argment is invalid", 2), 1);
 	if (av[5])
 	{
 		data->hav_meals = 1;
-		if ((data->limit_meals = ft_atoi(av[5])) == -1 || ft_atoi(av[5]) <= 0)
-			return (ft_putstr_fd("Error\nThe value of argment is invalid", 2),1);
+		data->limit_meals = ft_atoi(av[5]);
+		if (data->limit_meals == -1 || ft_atoi(av[5]) <= 0)
+			return (ft_putstr_fd("Error\nThe value of argment is invalid", 2),
+				1);
 	}
 	return (0);
 }

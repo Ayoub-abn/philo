@@ -6,86 +6,58 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:37:23 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 10:32:13 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:07:13 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-
-
-
-void *philo_routine(void *arg)
+int	check_flag(t_philo *philo)
 {
-    t_philo *philo = (t_philo *)arg;
-
-    // lock(&philo->data->meals);
-    //         printf("---->%d\n",philo->data->eat_all_meals);
-    
-        
-    //     if(philo->data->eat_all_meals <= 0)
-    //     {
-    //         printf("hii\n");
-    //         unlock(&philo->data->meals);
-    //         return (NULL);
-    //     }
-        // if(data->philos[i].meals == 0)
-    // unlock(&philo->data->meals);
-    if(philo->philo_id % 2 == 0)
-        ft_usleep(60,philo);
-    while (true) 
-    {
-        lock(&philo->data->flag);
-        if(philo->data->dead_flag == 1)
-            return (unlock(&philo->data->flag), NULL);
-        unlock(&philo->data->flag);
-
-        
-        ////////////eating/////////////
-        if (!is_eating(philo))
-            break;
-        ///////////////////////////////
-
-        
-        lock(&philo->data->flag);
-        if(philo->data->dead_flag == 1)
-            return (unlock(&philo->data->flag), NULL);
-        unlock(&philo->data->flag);
-
-        
-        ///////////sleeping///////////////
-        is_sleeping(philo);
-        /////////////////////////////////
-
-        
-        lock(&philo->data->flag);
-        if(philo->data->dead_flag == 1)
-            return (unlock(&philo->data->flag), NULL);
-        unlock(&philo->data->flag);
-
-        
-        //////////thinking//////////////
-        is_thinking(philo);
-        ////////////////////////////////
-
-    }
-    
-    return NULL;
+	lock(&philo->data->flag);
+	if (philo->data->dead_flag == 1)
+		return (unlock(&philo->data->flag), 1);
+	unlock(&philo->data->flag);
+	return (0);
 }
 
-void create_thread(t_program *data)
+void	*philo_routine(void *arg)
 {
-    data->start_time = get_current_time();
-    int i = 0;
-    while (i < data->philo_nb)
-    {
-        pthread_create(&data->philos[i].thread, NULL, philo_routine, &data->philos[i]);
-        i++;   
-    }
+	t_philo	*philo;
 
-    monitor(data);
-    i = 0;
-    while (i < data->philo_nb)
-        pthread_join(data->philos[i++].thread, NULL);
+	philo = (t_philo *)arg;
+	if (philo->philo_id % 2 == 0)
+		ft_usleep(60, philo);
+	while (true)
+	{
+		if (check_flag(philo))
+			return (NULL);
+		if (!is_eating(philo))
+			break ;
+		if (check_flag(philo))
+			return (NULL);
+		is_sleeping(philo);
+		if (check_flag(philo))
+			return (NULL);
+		is_thinking(philo);
+	}
+	return (NULL);
+}
+
+void	create_thread(t_program *data)
+{
+	int	i;
+
+	data->start_time = get_current_time();
+	i = 0;
+	while (i < data->philo_nb)
+	{
+		pthread_create(&data->philos[i].thread, NULL, philo_routine,
+			&data->philos[i]);
+		i++;
+	}
+	monitor(data);
+	i = 0;
+	while (i < data->philo_nb)
+		pthread_join(data->philos[i++].thread, NULL);
 }
