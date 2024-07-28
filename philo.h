@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:14:24 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/28 12:56:48 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/28 21:28:24 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define THINKING "is thinking"
 # define EATING "is eating"
 # define TAKEN_A_FORK "has taken a fork"
+// # define TAKEN_A_FORK_L "has taken a fork"
 
 struct	s_program;
 

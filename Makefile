@@ -2,8 +2,7 @@ NAME = philo
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 # CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
  CFLAGS = -Wall -Wextra -Werror 
-# SRC = main.c philo.c ft_putstr_fd.c ft_atoi.c 
-SRC = ${shell find . -type f -name "*.c"}
+SRC = data_init.c ft_putstr_fd.c main.c monitor.c parsing.c philo.c routine.c tools.c
 OBG = ${SRC:.c=.o}
 
 %.o:%.c
@@ -25,6 +24,3 @@ fclean: clean
 	@echo "🗑️"
 
 re:fclean all
-
-show:
-	echo "${SRC}"

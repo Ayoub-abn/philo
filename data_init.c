@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:19:34 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/28 14:48:09 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:16:59 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ bool	data_init(t_program *data)
 		if (data->hav_meals == 1)
 			data->philos[i].meals = data->limit_meals;
 		philo_data_init(data, i);
-		data->philos[i].r_fork = &data->forks[i + 1];
 		data->philos[i].l_fork = &data->forks[i];
+		data->philos[i].r_fork = &data->forks[i + 1];
 		if (i == data->philo_nb - 1)
 		{
-			data->philos[i].r_fork = &data->forks[i];
 			data->philos[i].l_fork = &data->forks[0];
+			data->philos[i].r_fork = &data->forks[i];
 		}
 	}
 	return (true);
