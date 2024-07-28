@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:14:24 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 22:46:47 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/28 12:56:48 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,13 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define RESET "\033[0m"
-# define RED "\033[31m"
-# define GREEN "\033[32m"
+// # define RESET "\033[0m"
+// # define RED "\033[31m"
 
 # define SLEEPING "is sleeping"
 # define THINKING "is thinking"
 # define EATING "is eating"
-// # define DIED 4
 # define TAKEN_A_FORK "has taken a fork"
-///////////////////////////mud///////////////////////////
 
 struct	s_program;
 
@@ -62,8 +59,6 @@ typedef struct s_program
 	int					dead_flag;
 	int					hav_meals;
 	int					eat_all_meals;
-	pthread_mutex_t		mx;
-	pthread_mutex_t		status;
 	pthread_mutex_t		monitor;
 	pthread_mutex_t		flag;
 	pthread_mutex_t		meals;
@@ -71,8 +66,8 @@ typedef struct s_program
 
 }						t_program;
 
-int						unlock(pthread_mutex_t *mx);
-int						lock(pthread_mutex_t *mx);
+void					unlock(pthread_mutex_t *mx);
+void					lock(pthread_mutex_t *mx);
 size_t					get_current_time(void);
 bool					data_init(t_program *data);
 void					monitor(t_program *data);

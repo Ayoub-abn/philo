@@ -1,4 +1,4 @@
 *.o
 *.out
 .vscode
-tkharebi9.cpp
+*.cpp

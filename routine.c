@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 18:22:05 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 23:19:04 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/28 14:50:43 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	one_philo(t_philo *philo)
 {
-	while (1)
+	while (true)
 	{
 		lock(&philo->data->flag);
 		if (philo->data->dead_flag == 1)
@@ -42,51 +42,31 @@ void	is_sleeping(t_philo *philo)
 	is_print(SLEEPING, philo);
 	ft_usleep(philo->data->sleep_time, philo);
 }
+
 void	is_thinking(t_philo *philo)
 {
 	is_print(THINKING, philo);
 }
+
 bool	is_eating(t_philo *philo)
 {
 	lock(philo->l_fork);
-	//------------------------------//
 	is_print(TAKEN_A_FORK, philo);
-	//------------------------------//
 	if (philo->data->philo_nb == 1)
 	{
 		if (one_philo(philo))
 			return (false);
 	}
-	//----------------------------//
-	// lock(&philo->data->flag);
-	// if (philo->data->dead_flag == 1)
-	// 	return (unlock(&philo->data->flag), unlock(philo->l_fork), false);
-	// unlock(&philo->data->flag);
-	//----------------------------//
-	//----------------------------//
 	lock(philo->r_fork);
-	//---------------------------//
-	// lock(&philo->data->flag);
-	// if (philo->data->dead_flag == 1)
-	// 	return (unlock(&philo->data->flag), unlock(philo->r_fork),
-	// 		unlock(philo->l_fork), false);
-	// unlock(&philo->data->flag);
-	//------------------------------//
 	is_print(TAKEN_A_FORK, philo);
-	//------------------------------//
-	// IS_EATING
 	is_print(EATING, philo);
-	//------------------------------//
 	if (philo->data->hav_meals)
 		check_meals_nb(philo);
-	//-----------------------------//
-	//----------last_meal----------//
 	lock(&philo->data->monitor);
 	philo->last_time_eating = get_current_time();
 	unlock(&philo->data->monitor);
-	//-----------------------------//
 	ft_usleep(philo->data->eat_time, philo);
-	//-----------------------------//
-	(unlock(philo->l_fork), unlock(philo->r_fork));
+	unlock(philo->l_fork);
+	unlock(philo->r_fork);
 	return (true);
 }

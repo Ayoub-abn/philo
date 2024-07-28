@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:21:31 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 20:23:33 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/28 14:46:50 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 
 void	free_and_destroy(t_program *data)
 {
+	int	i;
+
+	i = 0;
 	pthread_mutex_destroy(&data->flag);
 	pthread_mutex_destroy(&data->meals);
 	pthread_mutex_destroy(&data->monitor);
-	pthread_mutex_destroy(&data->status);
 	pthread_mutex_destroy(data->forks);
-	pthread_mutex_destroy(data->philos->r_fork);
-	pthread_mutex_destroy(data->philos->l_fork);
+	while (i > data->philo_nb)
+	{
+		pthread_mutex_destroy(data->philos[i].r_fork);
+		pthread_mutex_destroy(data->philos[i].l_fork);
+		i++;
+	}
 	free(data->forks);
 	free(data->philos);
 }

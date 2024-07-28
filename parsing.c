@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:54 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 16:59:04 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/27 19:07:29 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	check_argment(char **av, t_program *data)
 {
 	data->hav_meals = 0;
 	data->philo_nb = ft_atoi(av[1]);
-	data->die_time = (ft_atoi(av[2]));
-	data->eat_time = (ft_atoi(av[3]));
-	data->sleep_time = (ft_atoi(av[4]));
+	data->die_time = ft_atoi(av[2]);
+	data->eat_time = ft_atoi(av[3]);
+	data->sleep_time = ft_atoi(av[4]);
 	if (data->philo_nb <= 0 || data->die_time <= 0 || data->eat_time <= 0
 		|| data->sleep_time <= 0)
 		return (ft_putstr_fd("Error\nThe value of argment is invalid", 2), 1);
@@ -55,7 +55,7 @@ int	check_argment(char **av, t_program *data)
 	{
 		data->hav_meals = 1;
 		data->limit_meals = ft_atoi(av[5]);
-		if (data->limit_meals == -1 || ft_atoi(av[5]) <= 0)
+		if (ft_atoi(av[5]) <= 0)
 			return (ft_putstr_fd("Error\nThe value of argment is invalid", 2),
 				1);
 	}

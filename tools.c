@@ -6,7 +6,7 @@
 /*   By: aabdenou <aabdenou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:40:28 by aabdenou          #+#    #+#             */
-/*   Updated: 2024/07/24 23:44:39 by aabdenou         ###   ########.fr       */
+/*   Updated: 2024/07/28 14:20:18 by aabdenou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,14 @@ int	ft_usleep(size_t milliseconds, t_philo *philo)
 	return (0);
 }
 
-int	lock(pthread_mutex_t *mx)
+void	lock(pthread_mutex_t *mx)
 {
-	if (pthread_mutex_lock(mx))
-		return (ft_putstr_fd("error\npthread_mutex_lock Failed", 2), 1);
-	return (0);
+	pthread_mutex_lock(mx);
 }
 
-int	unlock(pthread_mutex_t *mx)
+void	unlock(pthread_mutex_t *mx)
 {
-	if (pthread_mutex_unlock(mx))
-		return (ft_putstr_fd("error\npthread_mutex_unlock Failed", 2), 1);
-	return (0);
+	pthread_mutex_unlock(mx);
 }
 
 void	is_print(char *str, t_philo *philo)
